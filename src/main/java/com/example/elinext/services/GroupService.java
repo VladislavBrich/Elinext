@@ -11,6 +11,8 @@ public interface GroupService {
 
     List <Student> getAllStudents(Long groupId);
 
+    List <Group> getAll();
+
 
 
 

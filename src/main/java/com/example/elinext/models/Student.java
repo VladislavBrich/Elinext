@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "students")
+@ToString
 public class Student {
 
     @Id

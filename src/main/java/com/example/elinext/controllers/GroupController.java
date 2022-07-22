@@ -1,5 +1,6 @@
 package com.example.elinext.controllers;
 
+import com.example.elinext.models.Group;
 import com.example.elinext.models.Student;
 import com.example.elinext.services.Impl.GroupServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,14 @@ public class GroupController {
     GroupServiceImpl groupService;
 
     @GetMapping("/students/{id}")
-    public List<Student> getAllStudentByGroup (@PathVariable("id")Long id){
+    public List<Student> getAllStudentByGroup(@PathVariable("id") Long id) {
         return groupService.getAllStudents(id);
+    }
+
+    @GetMapping()
+    public List<Group> getAllGroup() {
+        return groupService.getAll();
+
+
     }
 }

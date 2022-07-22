@@ -18,8 +18,12 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
 
     @Override
     public List<Student> getAllStudents(Long groupId) {
-      return studentService.studentsRepo.findAllByGroup_Id(groupId);
+        return studentService.studentsRepo.findAllByGroup_Id(groupId);
 
+    }
 
+    @Override
+    public List<Group> getAll() {
+       return groupsRepo.findAll();
     }
 }

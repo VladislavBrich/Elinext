@@ -14,7 +14,7 @@ public interface StudentsRepo extends JpaRepository<Student, Long> {
      @Query(value = "SELECT n FROM Student n" + " ORDER BY n.studentName,n.studentLastName")
     List<Student> findAllByStudentLastName(String studentLastname);
 
-    @Query("SELECT n FROM Student n WHERE n.group.id=:groupId ")
+     @Query("SELECT n FROM Student n WHERE n.group.id=:groupId ")
     List<Student> findAllByGroup_Id(Long groupId);
 
 
