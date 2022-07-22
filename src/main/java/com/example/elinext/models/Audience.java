@@ -1,8 +1,11 @@
 package com.example.elinext.models;
 
 import lombok.Data;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -11,12 +14,21 @@ public class Audience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "audience_number")
+
+    @NonNull
     private String audienceName;
 
-    private int groupNumber;
+    @ManyToOne
+    @JoinColumn(name = "university_id",referencedColumnName = "id")
+    University university;
 
-    private String timeClasses;
+    @NonNull
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = false,fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id",referencedColumnName = "id")
+    private List<Group> groups = new ArrayList<>();
 
-    private String dayForClasses;
+
+    public Audience() {
+
+    }
 }

@@ -1,8 +1,10 @@
 package com.example.elinext.models;
 
 import lombok.Data;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,11 +16,21 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int groupNumber;
+    @Column
+    @NonNull
+    private String groupName;
 
-    private int countStudents;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
+    private List<Student> students = new ArrayList<>();
 
-    private String classTime;
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "group_id",referencedColumnName = "id")
+    private University university;
 
-    private String classroomNumber;
+
+    public Group() {
+
+    }
 }
