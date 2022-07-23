@@ -24,16 +24,6 @@ public class Student {
     @NonNull
     private String studentLastName;
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "lecture_id",referencedColumnName = "id")
-    private Lecture lecture;
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "group_id",referencedColumnName = "id")
-    private Group group;
-
     public Student() {
 
     }

@@ -16,11 +16,8 @@ public class Audience {
     private Long id;
 
     @NonNull
-    private String audienceName;
+    private Integer audienceNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "university_id",referencedColumnName = "id")
-    University university;
 
     @NonNull
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = false,fetch = FetchType.LAZY)

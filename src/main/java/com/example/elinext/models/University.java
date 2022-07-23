@@ -1,12 +1,17 @@
 package com.example.elinext.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "universiry")
@@ -17,7 +22,7 @@ public class University {
 
     @Column(name= "name")
     @NonNull
-    private String name;
+    private String universityName;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id",referencedColumnName = "id")
@@ -28,7 +33,10 @@ public class University {
     private List <Group> groups = new ArrayList<>();
 
 
-    public University() {
 
-    }
+    public static University createDefault (String universityName){
+        return builder()
+                .universityName(universityName)
+                .build();
+}
 }
