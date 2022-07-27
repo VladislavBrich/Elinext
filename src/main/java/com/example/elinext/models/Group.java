@@ -1,13 +1,11 @@
 package com.example.elinext.models;
 
 import lombok.*;
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +18,6 @@ public class Group {
     private Long id;
 
     @Column
-    @NonNull
     private Long groupNumber;
 
     @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
@@ -31,8 +28,16 @@ public class Group {
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private List<Lecture> lectures = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "university_id", referencedColumnName = "id")
+    University university;
 
-    public Group(@NonNull Long groupNumber) {
+    @Column(name = "university_id", updatable = false, insertable = false)
+    Long universityId;
+
+    public Group(Long groupNumber, University university) {
         this.groupNumber = groupNumber;
+        this.university = university;
     }
 }
+

@@ -1,6 +1,8 @@
 package com.example.elinext.services;
 
+import com.example.elinext.dto.GroupDto;
 import com.example.elinext.dto.UniversityDto;
+import com.example.elinext.models.Group;
 import com.example.elinext.models.University;
 
 import java.util.List;
@@ -10,10 +12,18 @@ public interface UniversityService {
 
     UniversityDto getById(Long id);
 
-    void create(String universityName);
+    UniversityDto create(String universityName);
 
     void delete(Long universityId);
 
 
     Boolean existsByUniversityName(String universityName);
+
+    University findById (Long id);
+
+    University findByName(String universityName);
+
+    Boolean existsByUniversityId(Long id);
+
+
 }

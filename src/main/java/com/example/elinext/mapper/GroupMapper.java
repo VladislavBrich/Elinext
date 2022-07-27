@@ -11,8 +11,16 @@ import java.util.stream.Collectors;
 
 @Component
 public class GroupMapper {
+
+    private UniversityMapper universityMapper;
+
+    public GroupMapper(UniversityMapper universityMapper) {
+        this.universityMapper = universityMapper;
+    }
+
     public GroupDto groupToGroupDto(Group group) {
-        return new GroupDto(group.getId(), group.getGroupNumber());
+        return new GroupDto(group.getId(),
+                group.getGroupNumber(),universityMapper.universityToUniversityDto(group.getUniversity()));
     }
 
     public List<GroupDto> groupDtoList(List<Group> groups) {

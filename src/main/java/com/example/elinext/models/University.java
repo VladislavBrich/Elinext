@@ -21,18 +21,17 @@ public class University {
     Long id;
 
     @Column(name= "name")
-    @NonNull
     private String universityName;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
-    @JoinColumn(name = "university_id",referencedColumnName = "id")
+    @JoinColumn(columnDefinition = "university_id",referencedColumnName = "id")
     private List <Audience> audiences = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id",referencedColumnName = "id")
     private List <Group> groups = new ArrayList<>();
 
-    public University(@NonNull String universityName) {
+    public University( String universityName) {
         this.universityName = universityName;
     }
 }

@@ -32,9 +32,8 @@ public class UniversityController {
     }
 
     @PostMapping("/create/{universityName}")
-    public AskDto createUniversity(@PathVariable String universityName) {
-        universityService.create(universityName);
-        return AskDto.makeDefault(true);
+    public UniversityDto createUniversity(@PathVariable String universityName) {
+       return universityService.create(universityName);
     }
     @DeleteMapping("/delete/{universityId}")
     public AskDto deleteUniversity(@PathVariable Long universityId) {

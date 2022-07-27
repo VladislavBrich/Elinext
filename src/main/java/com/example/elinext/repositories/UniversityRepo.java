@@ -15,6 +15,8 @@ public interface UniversityRepo extends JpaRepository<University, Long> {
 
     Boolean existsByUniversityName(String name);
 
+    University findByUniversityName(String name);
+
 
 
 }

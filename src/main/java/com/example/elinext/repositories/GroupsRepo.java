@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface GroupsRepo extends JpaRepository<Group, Long> {
 
+void  deleteByGroupNumberAndUniversityId(Long groupNumber, Long universityId);
 
-
-
+boolean existsByGroupNumber(Long groupNumber);
 }

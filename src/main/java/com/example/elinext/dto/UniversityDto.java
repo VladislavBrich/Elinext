@@ -14,15 +14,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UniversityDto {
 
-    @NonNull
+
     Long id;
 
-    @NonNull
+
     String name;
-
-    @NonNull
-    List<Group> groups;
-
-
 }
 

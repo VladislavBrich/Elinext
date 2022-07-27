@@ -11,17 +11,18 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class GroupDto {
-
     private Long id;
-
     private Long number;
 
-    UniversityDto universityDto;
+    private UniversityDto university;
 
-    public GroupDto(Long id, Long number) {
+
+    public GroupDto(Long id, Long number, UniversityDto university) {
         this.id = id;
         this.number = number;
+        this.university = university;
     }
-
 }
+
+
 

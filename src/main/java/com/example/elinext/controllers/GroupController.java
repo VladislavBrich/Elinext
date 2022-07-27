@@ -1,32 +1,35 @@
 package com.example.elinext.controllers;
 
 import com.example.elinext.dto.AskDto;
+import com.example.elinext.dto.AskRequestDto;
 import com.example.elinext.dto.GroupDto;
 
 import com.example.elinext.models.Group;
 import com.example.elinext.services.Impl.GroupServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/groups")
+@RequestMapping(value = "/groups",consumes = MediaType.APPLICATION_JSON_VALUE)
 public class GroupController {
 
     private GroupServiceImpl groupService;
 
 
-    @GetMapping()
-    public List<Group> getAllGroups() {
-        return groupService.getAll();
+    @GetMapping("/university/{universityId}")
+    public List<GroupDto> getAllGroups(@PathVariable Long universityId) {
+        return groupService.getAll(universityId);
     }
 
-    @PostMapping("create/{groupNumber}")
-    public AskDto createGroup(@PathVariable Long groupNumber, @RequestBody String universityName) {
-        groupService.delete(groupNumber, universityName);
+    @PostMapping(value = "create")
+    public AskDto createGroup(@RequestBody AskRequestDto askRequestDto) {
+        groupService.create(askRequestDto.getGroupNumber(), askRequestDto.getUniversityName());
         return AskDto.makeDefault(true);
     }
 
@@ -35,9 +38,9 @@ public class GroupController {
         return groupService.getById(id);
     }
 
-    @DeleteMapping("delete")
-    public AskDto deleteGroupByIdAndUniversityName(@RequestBody Long groupId, @RequestBody String universityName) {
-        groupService.delete(groupId, universityName);
+    @DeleteMapping("delete/{universityId}/{groupId}")
+    public AskDto deleteGroupByIdAndUniversityName(@PathVariable Long groupId, @PathVariable Long universityId) {
+        groupService.delete(groupId, universityId);
         return AskDto.makeDefault(true);
     }
 }

@@ -18,12 +18,6 @@ public class Audience {
     @NonNull
     private Integer audienceNumber;
 
-
-    @NonNull
-    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY)
-    @JoinColumn(name = "audience_id",referencedColumnName = "id")
-    private List<Group> groups = new ArrayList<>();
-
     @NonNull
     @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "audience_id",referencedColumnName = "id")

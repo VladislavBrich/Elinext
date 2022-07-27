@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class UniversityMapper {
 
     public UniversityDto universityToUniversityDto (University university){
-       return new UniversityDto(university.getId(), university.getUniversityName(), university.getGroups());
+       return new UniversityDto(university.getId(), university.getUniversityName());
     }
     public List<UniversityDto> universityDtoList (List<University>universities){
         return universities.stream().map(this::universityToUniversityDto)

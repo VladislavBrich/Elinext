@@ -7,11 +7,8 @@ import com.example.elinext.mapper.GroupMapper;
 import com.example.elinext.models.Group;
 import com.example.elinext.models.University;
 import com.example.elinext.repositories.GroupsRepo;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,19 +26,21 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
 
 
     @Override
-    public void create(Long groupNumber, String universityName) {
-        if (universityService.existsByUniversityName(universityName)) {
-            throw new BadRequestException(String.format("University with that name \"%s\" is already exist", universityName));
+    public GroupDto create(Long groupNumber, String universityName) {
+        if (!universityService.existsByUniversityName(universityName)) {
+            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", universityName));
         }
-        Group group = new Group(groupNumber);
+        University university = universityService.findByName(universityName);
+        Group group = new Group(groupNumber, university);
         groupsRepo.save(group);
+        return groupMapper.groupToGroupDto(group);
 
     }
 
-    @Override
-    public List<Group> getAll() {
-        List<Group> groups = groupsRepo.findAll();
-        return groups;
+    public List<GroupDto> getAll(Long universityId) {
+        University university = universityService.findById(universityId);
+        List<Group> groups = university.getGroups();
+       return groupMapper.groupDtoList(groups);
     }
 
     @Override
@@ -50,13 +49,14 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
         return group;
     }
 
-    public void delete(Long groupNumber, String universityName) {
-        if (universityService.existsByUniversityName(universityName)) {
-            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", universityName));
-        }
-        if (groupsRepo.existsById(groupNumber)) {
-            throw new BadRequestException(String.format("Group with that Number \"%s\" is not exist", universityName));
+    public void delete(Long groupNumber, Long universityId) {
+        if (universityService.existsByUniversityId(universityId)
+                && groupsRepo.existsByGroupNumber(groupNumber)) {
+            groupsRepo.deleteByGroupNumberAndUniversityId(groupNumber,universityId);
+        }else throw new NotFoundException(String.format("Bad request"));
+
+
         }
     }
-}
+
 

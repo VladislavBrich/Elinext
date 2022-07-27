@@ -11,9 +11,9 @@ import java.util.List;
 public interface GroupService {
 
 
-    void create(Long groupNumber, String universityId);
+    GroupDto create(Long groupNumber, String universityId);
 
-    List<Group> getAll ();
+    List<GroupDto> getAll (Long universityId);
 
     Group getById (Long id);
 
