@@ -13,13 +13,7 @@ import java.util.List;
 public interface StudentsService {
 
 
-    List<Student> getByLastName(String studentLastName);
-
-
-
-
-
-
+    List<Student> getAllByLastName(String studentLastName);
 
 
 

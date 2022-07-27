@@ -19,7 +19,5 @@ public class Lecture {
     private String lecturesName;
 
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
-    @JoinColumn(name = "lecture_id",referencedColumnName = "id")
-    private List<Audience> audiences = new ArrayList<>();
+
 }

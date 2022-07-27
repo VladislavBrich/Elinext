@@ -3,58 +3,42 @@ package com.example.elinext.controllers;
 
 import com.example.elinext.dto.AskDto;
 import com.example.elinext.dto.UniversityDto;
-import com.example.elinext.exception.BadRequestException;
-import com.example.elinext.exception.NotFoundException;
-import com.example.elinext.factory.UniversityDtoFactory;
 import com.example.elinext.models.University;
-import com.example.elinext.repositories.UniversityRepo;
+import com.example.elinext.services.Impl.UniversityServiceImpl;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
-@RequiredArgsConstructor
+
+
 @RestController
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @RequestMapping("university")
 public class UniversityController {
+   private final UniversityServiceImpl universityService;
 
-    @Autowired
-    UniversityRepo universityRepo;
 
-    @Autowired
-    UniversityDtoFactory universityDtoFactory;
 
     @GetMapping()
-    public ResponseEntity<List<UniversityDto>> getUniversity(@RequestParam String filter) {
-
-        boolean isFiltered = !filter.trim().isEmpty();
-        List<University> universities = universityRepo.findAllByFilter(isFiltered, filter);
-
-        return ResponseEntity.ok(universityDtoFactory.createUniversityDtoList(universities));
-
+    public List<UniversityDto> getAllUniversity() {
+        return universityService.getAll();
+    }
+    @GetMapping("/{id}")
+    public UniversityDto getUniversityById (@PathVariable Long id){
+        return universityService.getById(id);
     }
 
-    @PostMapping("create/{universityName}")
-    public ResponseEntity<UniversityDto> createUniversity(@PathVariable String universityName) {
-        if (universityRepo.existsByUniversityName(universityName)) {
-            throw new BadRequestException(String.format("University with that name \"%s\" is already exist", universityName));
-        }
-        University university = universityRepo.saveAndFlush(University.createDefault(universityName));
-
-        return ResponseEntity.ok(universityDtoFactory.createUniversityDto(university));
+    @PostMapping("/create/{universityName}")
+    public AskDto createUniversity(@PathVariable String universityName) {
+        universityService.create(universityName);
+        return AskDto.makeDefault(true);
     }
-
-    @DeleteMapping("delete/{universityId}")
-    public ResponseEntity<AskDto> deleteUniversity(@PathVariable Long universityId){
-        if (universityRepo.existsById(universityId)){
-            universityRepo.deleteById(universityId);
-        }
-        return ResponseEntity.ok(AskDto.makeDefault(true));
+    @DeleteMapping("/delete/{universityId}")
+    public AskDto deleteUniversity(@PathVariable Long universityId) {
+       universityService.delete(universityId);
+        return AskDto.makeDefault(true);
     }
 }

@@ -32,11 +32,8 @@ public class University {
     @JoinColumn(name = "university_id",referencedColumnName = "id")
     private List <Group> groups = new ArrayList<>();
 
-
-
-    public static University createDefault (String universityName){
-        return builder()
-                .universityName(universityName)
-                .build();
+    public University(@NonNull String universityName) {
+        this.universityName = universityName;
+    }
 }
-}
+

@@ -1,6 +1,8 @@
 package com.example.elinext.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.lang.NonNull;
 
@@ -9,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Table(name = "students")
-@ToString
 public class Student {
 
     @Id
@@ -24,9 +27,6 @@ public class Student {
     @NonNull
     private String studentLastName;
 
-    public Student() {
-
-    }
 }
 
 

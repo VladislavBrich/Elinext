@@ -18,9 +18,9 @@ public class StudentController {
     StudentServiceImpl studentService;
 
 
-    @GetMapping("/getByLastName/{lastName}")
-    public List<Student> getAllByLastName(@PathVariable("lastName") String studentLastName) {
-        List<Student> students = studentService.getByLastName(studentLastName);
+    @GetMapping("/{LastName}")
+    public List<Student> getAllByLastName(@PathVariable String LastName) {
+        List<Student> students = studentService.getAllByLastName(LastName);
         return students;
     }
 

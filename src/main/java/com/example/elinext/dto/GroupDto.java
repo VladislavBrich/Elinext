@@ -1,20 +1,27 @@
 package com.example.elinext.dto;
 
+import com.example.elinext.models.Group;
+import com.example.elinext.models.University;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class GroupDto {
-    @NonNull
-    Long id;
 
-    @NonNull
-    Integer number;
+    private Long id;
 
-    @NonNull
+    private Long number;
+
     UniversityDto universityDto;
+
+    public GroupDto(Long id, Long number) {
+        this.id = id;
+        this.number = number;
+    }
+
 }
+

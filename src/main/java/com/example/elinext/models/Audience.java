@@ -20,9 +20,14 @@ public class Audience {
 
 
     @NonNull
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = false,fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id",referencedColumnName = "id")
+    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "audience_id",referencedColumnName = "id")
     private List<Group> groups = new ArrayList<>();
+
+    @NonNull
+    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "audience_id",referencedColumnName = "id")
+    private List<Lecture> lectures = new ArrayList<>();
 
 
     public Audience() {
