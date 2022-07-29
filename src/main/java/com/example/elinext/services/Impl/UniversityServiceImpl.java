@@ -1,5 +1,6 @@
 package com.example.elinext.services.Impl;
 
+import com.example.elinext.dto.AskRequestUniversityDto;
 import com.example.elinext.dto.GroupDto;
 import com.example.elinext.dto.UniversityDto;
 import com.example.elinext.exception.BadRequestException;
@@ -27,11 +28,11 @@ public class UniversityServiceImpl implements UniversityService {
     private GroupMapper groupMapper;
 
     @Override
-    public UniversityDto create(String universityName) {
-        if (universityRepo.existsByUniversityName(universityName)) {
-            throw new BadRequestException(String.format("University with that name \"%s\" is already exist", universityName));
+    public UniversityDto create(AskRequestUniversityDto askRequestUniversityDto) {
+        if (universityRepo.existsByUniversityName(askRequestUniversityDto.getUniversityName())) {
+            throw new BadRequestException(String.format("University with that name \"%s\" is already exist", askRequestUniversityDto.getUniversityName()));
         }
-        University university = new University(universityName);
+        University university = new University(askRequestUniversityDto.getUniversityName());
         universityRepo.save(university);
         return universityMapper.universityToUniversityDto(university);
     }

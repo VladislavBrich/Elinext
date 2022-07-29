@@ -1,30 +1,31 @@
 package com.example.elinext.controllers;
 
 
-import com.example.elinext.models.Student;
+import com.example.elinext.dto.AskRequestStudentDto;
+import com.example.elinext.dto.StudentDto;
 import com.example.elinext.services.Impl.StudentServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
+@AllArgsConstructor
+@RequestMapping(value = "student",produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
-    @Autowired
-    StudentServiceImpl studentService;
 
+    private StudentServiceImpl studentService;
 
-    @GetMapping("/{LastName}")
-    public List<Student> getAllByLastName(@PathVariable String LastName) {
-        List<Student> students = studentService.getAllByLastName(LastName);
-        return students;
+    @PostMapping("create")
+    public StudentDto createStudentAtGroup(@RequestBody AskRequestStudentDto askRequestStudentDto) {
+        return studentService.create(askRequestStudentDto);
     }
-
-
+    @GetMapping("{lastName}")
+    public List<StudentDto> getStudentByLastName (@PathVariable String lastName){
+        return studentService.getByLastName(lastName);
+    }
 }
 
 

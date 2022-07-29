@@ -1,5 +1,6 @@
 package com.example.elinext.services;
 
+import com.example.elinext.dto.AskRequestUniversityDto;
 import com.example.elinext.dto.GroupDto;
 import com.example.elinext.dto.UniversityDto;
 import com.example.elinext.models.Group;
@@ -12,7 +13,7 @@ public interface UniversityService {
 
     UniversityDto getById(Long id);
 
-    UniversityDto create(String universityName);
+    UniversityDto create(AskRequestUniversityDto askRequestUniversityDto);
 
     void delete(Long universityId);
 

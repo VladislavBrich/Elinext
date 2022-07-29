@@ -1,22 +1,21 @@
 package com.example.elinext.services;
 
+import com.example.elinext.dto.AskRequestGroupDto;
 import com.example.elinext.dto.GroupDto;
-import com.example.elinext.mapper.GroupMapper;
+import com.example.elinext.dto.StudentDto;
 import com.example.elinext.models.Group;
-import com.example.elinext.models.Student;
-import com.example.elinext.models.University;
 
 import java.util.List;
 
 public interface GroupService {
 
 
-    GroupDto create(Long groupNumber, String universityId);
+    GroupDto create(AskRequestGroupDto askRequestGroupDto);
 
-    List<GroupDto> getAll (Long universityId);
+    List<GroupDto> getAll(Long universityId);
 
-    Group getById (Long id);
+    Group getById(Long id);
 
-
+    List<StudentDto> getAllStudentByGroupId(Long GroupId);
 
 }

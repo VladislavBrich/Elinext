@@ -2,6 +2,7 @@ package com.example.elinext.controllers;
 
 
 import com.example.elinext.dto.AskDto;
+import com.example.elinext.dto.AskRequestUniversityDto;
 import com.example.elinext.dto.UniversityDto;
 import com.example.elinext.models.University;
 import com.example.elinext.services.Impl.UniversityServiceImpl;
@@ -31,9 +32,9 @@ public class UniversityController {
         return universityService.getById(id);
     }
 
-    @PostMapping("/create/{universityName}")
-    public UniversityDto createUniversity(@PathVariable String universityName) {
-       return universityService.create(universityName);
+    @PostMapping("/create")
+    public UniversityDto createUniversity(@RequestBody AskRequestUniversityDto askRequestUniversityDto) {
+       return universityService.create(askRequestUniversityDto);
     }
     @DeleteMapping("/delete/{universityId}")
     public AskDto deleteUniversity(@PathVariable Long universityId) {

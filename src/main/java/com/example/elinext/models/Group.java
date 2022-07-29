@@ -39,5 +39,9 @@ public class Group {
         this.groupNumber = groupNumber;
         this.university = university;
     }
+
+    public Group(Long id) {
+        this.id = id;
+    }
 }
 
