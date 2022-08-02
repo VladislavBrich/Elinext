@@ -12,7 +12,7 @@ public class AskDto {
 
     Boolean answer;
 
-    public static AskDto makeDefault (Boolean answer){
-        return  builder().answer(answer).build();
+    public static AskDto giveAnAnswer(Boolean answer) {
+        return builder().answer(answer).build();
     }
 }

@@ -19,12 +19,10 @@ public class Audience {
     private Integer audienceNumber;
 
     @NonNull
-    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY)
-    @JoinColumn(name = "audience_id",referencedColumnName = "id")
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "audience_id", referencedColumnName = "id")
     private List<Lecture> lectures = new ArrayList<>();
 
-
     public Audience() {
-
     }
 }

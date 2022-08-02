@@ -9,8 +9,11 @@ import lombok.Data;
 public class StudentDto {
 
     private Long id;
+
     private String StudentName;
+
     private String studentLastName;
+
     private GroupDto group;
-    }
+}
 

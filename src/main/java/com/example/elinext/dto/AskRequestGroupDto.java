@@ -6,6 +6,6 @@ import lombok.Data;
 public class AskRequestGroupDto {
 
     private Long groupNumber;
-    private String universityName;
 
+    private String universityName;
 }

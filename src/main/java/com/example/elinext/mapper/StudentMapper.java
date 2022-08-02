@@ -18,10 +18,12 @@ public class StudentMapper {
     }
 
     public StudentDto createUserDto(Student student) {
-        return new StudentDto(student.getId(),
+        return new StudentDto(
+                student.getId(),
                 student.getStudentName(),
                 student.getStudentLastName(),
-                groupMapper.groupToGroupDto(student.getGroup()));
+                groupMapper.groupToGroupDto(student.getGroup())
+        );
     }
 
     public List<StudentDto> createStudentDtoList(List<Student> students) {

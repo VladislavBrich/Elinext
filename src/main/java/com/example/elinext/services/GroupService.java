@@ -2,13 +2,13 @@ package com.example.elinext.services;
 
 import com.example.elinext.dto.AskRequestGroupDto;
 import com.example.elinext.dto.GroupDto;
+import com.example.elinext.dto.LectureDto;
 import com.example.elinext.dto.StudentDto;
 import com.example.elinext.models.Group;
 
 import java.util.List;
 
 public interface GroupService {
-
 
     GroupDto create(AskRequestGroupDto askRequestGroupDto);
 
@@ -18,4 +18,7 @@ public interface GroupService {
 
     List<StudentDto> getAllStudentByGroupId(Long GroupId);
 
+    boolean existByGroupId(Long groupId);
+
+    List<LectureDto> getAllLecturesByGroupId(Long groupId);
 }

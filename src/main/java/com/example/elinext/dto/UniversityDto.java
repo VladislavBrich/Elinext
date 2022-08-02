@@ -14,10 +14,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UniversityDto {
 
+    private Long id;
 
-    Long id;
-
-
-    String name;
+    private String name;
 }
 

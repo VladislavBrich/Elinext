@@ -2,12 +2,15 @@ package com.example.elinext.services.Impl;
 
 import com.example.elinext.dto.AskRequestGroupDto;
 import com.example.elinext.dto.GroupDto;
+import com.example.elinext.dto.LectureDto;
 import com.example.elinext.dto.StudentDto;
 import com.example.elinext.exception.BadRequestException;
 import com.example.elinext.exception.NotFoundException;
 import com.example.elinext.mapper.GroupMapper;
+import com.example.elinext.mapper.LectureMapper;
 import com.example.elinext.mapper.StudentMapper;
 import com.example.elinext.models.Group;
+import com.example.elinext.models.Lecture;
 import com.example.elinext.models.Student;
 import com.example.elinext.models.University;
 import com.example.elinext.repositories.GroupsRepo;
@@ -15,19 +18,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class GroupServiceImpl implements com.example.elinext.services.GroupService {
 
     private GroupsRepo groupsRepo;
-
     private UniversityServiceImpl universityService;
-
     private GroupMapper groupMapper;
     private StudentMapper studentMapper;
+
+    private LectureMapper lectureMapper;
 
 
     @Override
@@ -39,13 +40,12 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
         Group group = new Group(askRequestGroupDto.getGroupNumber(), university);
         groupsRepo.save(group);
         return groupMapper.groupToGroupDto(group);
-
     }
 
     public List<GroupDto> getAll(Long universityId) {
         University university = universityService.findById(universityId);
         List<Group> groups = university.getGroups();
-       return groupMapper.groupDtoList(groups);
+        return groupMapper.groupDtoList(groups);
     }
 
     @Override
@@ -55,18 +55,32 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
 
     @Override
     public List<StudentDto> getAllStudentByGroupId(Long groupId) {
-       Group group = groupsRepo.findById(groupId)
-               .orElseThrow(()->new NotFoundException(String.format("Group with that id \"%s\" is not exist",groupId)));
-        List <Student> students = group.getStudents();
-      return studentMapper.createStudentDtoList(students);
+        Group group = getById(groupId);
+        List<Student> students = group.getStudents();
+        return studentMapper.createStudentDtoList(students);
+    }
+
+    @Override
+    public boolean existByGroupId(Long groupId) {
+        return groupsRepo.existsById(groupId);
+    }
+
+    @Override
+    public List<LectureDto> getAllLecturesByGroupId(Long groupId) {
+        Group group = getById(groupId);
+        List<Lecture> lectures = group.getLectures();
+        return lectureMapper.createListLectureDto(lectures);
     }
 
     public void delete(Long groupNumber, Long universityId) {
         if (universityService.existsByUniversityId(universityId)
                 && groupsRepo.existsByGroupNumber(groupNumber)) {
-            groupsRepo.deleteByGroupNumberAndUniversityId(groupNumber,universityId);
-        }else throw new NotFoundException(String.format("Bad request"));
-        }
+            groupsRepo.deleteByGroupNumberAndUniversityId(groupNumber, universityId);
+        } else throw new NotFoundException(
+                String.format("Group with groupNumber " + groupNumber + " or universityId "
+                        + universityId + " is not exist")
+        );
     }
+}
 
 

@@ -4,41 +4,37 @@ package com.example.elinext.controllers;
 import com.example.elinext.dto.AskDto;
 import com.example.elinext.dto.AskRequestUniversityDto;
 import com.example.elinext.dto.UniversityDto;
-import com.example.elinext.models.University;
 import com.example.elinext.services.Impl.UniversityServiceImpl;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
 
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("university")
 public class UniversityController {
-   private final UniversityServiceImpl universityService;
-
-
+    private final UniversityServiceImpl universityService;
 
     @GetMapping()
     public List<UniversityDto> getAllUniversity() {
         return universityService.getAll();
     }
+
     @GetMapping("/{id}")
-    public UniversityDto getUniversityById (@PathVariable Long id){
+    public UniversityDto getUniversityById(@PathVariable Long id) {
         return universityService.getById(id);
     }
 
     @PostMapping("/create")
     public UniversityDto createUniversity(@RequestBody AskRequestUniversityDto askRequestUniversityDto) {
-       return universityService.create(askRequestUniversityDto);
+        return universityService.create(askRequestUniversityDto);
     }
+
     @DeleteMapping("/delete/{universityId}")
     public AskDto deleteUniversity(@PathVariable Long universityId) {
-       universityService.delete(universityId);
-        return AskDto.makeDefault(true);
+        universityService.delete(universityId);
+        return AskDto.giveAnAnswer(true);
     }
 }

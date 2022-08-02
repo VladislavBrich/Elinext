@@ -1,12 +1,6 @@
 package com.example.elinext.dto;
 
-import com.example.elinext.models.Group;
-import com.example.elinext.models.University;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.Data;
 
 @Data
 public class GroupDto {
@@ -15,6 +9,10 @@ public class GroupDto {
 
     private UniversityDto university;
 
+    public GroupDto(Long id, Long number) {
+        this.id = id;
+        this.number = number;
+    }
 
     public GroupDto(Long id, Long number, UniversityDto university) {
         this.id = id;

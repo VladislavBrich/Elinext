@@ -15,5 +15,8 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 
     List <Student> findAllByStudentLastName(String studentLastName);
 
+    Student findByStudentLastName(String studentLastName);
+
+    Boolean existsByStudentLastName(String studentLastName);
 
 }

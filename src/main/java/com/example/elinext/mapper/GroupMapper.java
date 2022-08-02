@@ -1,21 +1,21 @@
 package com.example.elinext.mapper;
 
 import com.example.elinext.dto.GroupDto;
-import com.example.elinext.dto.UniversityDto;
 import com.example.elinext.models.Group;
-import com.example.elinext.models.University;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class GroupMapper {
 
     private final UniversityMapper universityMapper;
 
-    public GroupMapper(UniversityMapper universityMapper) {
-        this.universityMapper = universityMapper;
+    public GroupDto groupDtoForLecture (Group group){
+        return new GroupDto(group.getId(),group.getGroupNumber());
     }
 
     public GroupDto groupToGroupDto(Group group) {
