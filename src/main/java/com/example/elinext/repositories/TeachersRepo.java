@@ -13,5 +13,5 @@ public interface TeachersRepo extends JpaRepository<Teacher, Long> {
 
     Teacher getTeacherByTeacherSurname(String teacherSurname);
 
-    List<Teacher> getAllByUniversityName(String universityName);
+    List<Teacher> getAllByUniversityId(Long universityId);
 }

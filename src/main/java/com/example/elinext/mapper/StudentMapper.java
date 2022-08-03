@@ -17,16 +17,16 @@ public class StudentMapper {
         this.groupMapper = groupMapper;
     }
 
-    public StudentDto createUserDto(Student student) {
+    public StudentDto createStudentDto(Student student) {
         return new StudentDto(
                 student.getId(),
-                student.getStudentName(),
-                student.getStudentLastName(),
+                student.getName(),
+                student.getSurname(),
                 groupMapper.groupToGroupDto(student.getGroup())
         );
     }
 
     public List<StudentDto> createStudentDtoList(List<Student> students) {
-        return students.stream().map(this::createUserDto).collect(Collectors.toList());
+        return students.stream().map(this::createStudentDto).collect(Collectors.toList());
     }
 }

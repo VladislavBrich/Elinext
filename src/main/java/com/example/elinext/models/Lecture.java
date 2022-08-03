@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Lecture extends BaseEntity {
 
     @Column
-    private String lecturesName;
+    private String name;
     @Column(name = "date_time")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -25,11 +25,11 @@ public class Lecture extends BaseEntity {
     DaysOfWeek daysOfWeek;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_surname", referencedColumnName = "teacherSurname")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
-    @Column(name = "teacher_surname", updatable = false, insertable = false)
-    String teacherSurname;
+    @Column(name = "teacher_id", updatable = false, insertable = false)
+    Long teacherId;
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")
@@ -38,9 +38,9 @@ public class Lecture extends BaseEntity {
     @Column(name = "group_id", updatable = false, insertable = false)
     Long groupId;
 
-    public Lecture(String lecturesName, LocalDateTime localDateTime, DaysOfWeek daysOfWeek, Teacher teacher, Group group) {
+    public Lecture(String name, LocalDateTime localDateTime, DaysOfWeek daysOfWeek, Teacher teacher, Group group) {
 
-        this.lecturesName = lecturesName;
+        this.name = name;
         this.localDateTime = localDateTime;
         this.daysOfWeek = daysOfWeek;
         this.teacher = teacher;

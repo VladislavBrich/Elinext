@@ -25,19 +25,18 @@ public class StudentServiceImpl implements StudentService {
     private GroupServiceImpl groupService;
     private StudentMapper studentMapper;
     private LectureMapper lectureMapper;
-
     private LectureServiceImpl lectureService;
 
     @Override
     public StudentDto create(AskRequestStudentDto askRequestStudentDto) {
         Group group = groupService.getById(askRequestStudentDto.getGroupId());
         Student student = new Student(
-                askRequestStudentDto.getStudentName(),
-                askRequestStudentDto.getStudentLastName(),
+                askRequestStudentDto.getName(),
+                askRequestStudentDto.getSurname(),
                 group
         );
         studentRepo.save(student);
-        return studentMapper.createUserDto(student);
+        return studentMapper.createStudentDto(student);
     }
 
     @Override
@@ -48,8 +47,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> getByLastName(String studentLastName) {
-        List<Student> students = studentRepo.findAllByStudentLastName(studentLastName);
+    public List<StudentDto> getByLastName(String surname) {
+        List<Student> students = studentRepo.findAllBySurname(surname);
         return studentMapper.createStudentDtoList(students);
     }
 
@@ -61,15 +60,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<LectureDto> getLecturesByDayOfWeek(String studentLastName, DaysOfWeek daysOfWeek) {
-        if (studentRepo.existsByStudentLastName(studentLastName)) {
-            Student student = studentRepo.findByStudentLastName(studentLastName);
+    public List<LectureDto> getLecturesByDayOfWeek(String surname, DaysOfWeek daysOfWeek) {
+        if (studentRepo.existsBySurname(surname)) {
+            Student student = studentRepo.findBySurname(surname);
             Group group = student.getGroup();
             List<Lecture> lectures = lectureService.getAllByDaysOfWeekAndGroupId(daysOfWeek, group.getId());
             lectureMapper.createListLectureDto(lectures);
             return lectureMapper.createListLectureDto(lectures);
         } else
-            throw new NotFoundException(String.format("Student with studentLastName \"%s\" is not exist ", studentLastName));
+            throw new NotFoundException(String.format("Student with studentLastName \"%s\" not exist ", surname));
+    }
+
+    @Override
+    public StudentDto update(Long id, String name, String surname, Long groupId) {
+        Student student = studentRepo.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Student with id" + id + " not found")));
+        if (!(name == null)) student.setName(name);
+        if (!(surname == null)) student.setSurname(surname);
+        if (!(groupId == null)) student.setGroupId(groupId);
+        studentRepo.save(student);
+        return studentMapper.createStudentDto(student);
     }
 }
 

@@ -19,4 +19,6 @@ public interface UniversityService {
     University findByName(String universityName);
 
     Boolean existsByUniversityId(Long id);
+
+    UniversityDto update (Long id,String name);
 }

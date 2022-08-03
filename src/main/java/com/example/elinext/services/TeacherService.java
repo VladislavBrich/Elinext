@@ -14,7 +14,9 @@ public interface TeacherService {
 
     TeacherDto createTeacher(AskRequestTeacherDto askRequestTeacherDto);
 
-    List<TeacherDto> getAllByUniversity(String universityName);
+    List<TeacherDto> getAllByUniversityId (Long id);
 
     String deleteById(Long teacherId);
+
+    TeacherDto update (Long id, String name, String surname);
 }

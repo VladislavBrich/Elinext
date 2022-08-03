@@ -4,7 +4,6 @@ import com.example.elinext.dto.AskRequestGroupDto;
 import com.example.elinext.dto.GroupDto;
 import com.example.elinext.dto.LectureDto;
 import com.example.elinext.dto.StudentDto;
-import com.example.elinext.exception.BadRequestException;
 import com.example.elinext.exception.NotFoundException;
 import com.example.elinext.mapper.GroupMapper;
 import com.example.elinext.mapper.LectureMapper;
@@ -33,11 +32,9 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
 
     @Override
     public GroupDto create(AskRequestGroupDto askRequestGroupDto) {
-        if (!universityService.existsByUniversityName(askRequestGroupDto.getUniversityName())) {
-            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", askRequestGroupDto.getUniversityName()));
-        }
+        universityService.existsByUniversityName(askRequestGroupDto.getUniversityName());
         University university = universityService.findByName(askRequestGroupDto.getUniversityName());
-        Group group = new Group(askRequestGroupDto.getGroupNumber(), university);
+        Group group = new Group(askRequestGroupDto.getNumber(), university);
         groupsRepo.save(group);
         return groupMapper.groupToGroupDto(group);
     }
@@ -61,8 +58,8 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
     }
 
     @Override
-    public boolean existByGroupId(Long groupId) {
-        return groupsRepo.existsById(groupId);
+    public void existByGroupId(Long groupId) {
+        groupsRepo.existsById(groupId);
     }
 
     @Override
@@ -70,6 +67,14 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
         Group group = getById(groupId);
         List<Lecture> lectures = group.getLectures();
         return lectureMapper.createListLectureDto(lectures);
+    }
+
+    @Override
+    public GroupDto update(Long id, Long number) {
+        Group group = getById(id);
+        group.setGroupNumber(number);
+        groupsRepo.save(group);
+        return groupMapper.groupToGroupDto(group);
     }
 
     public void delete(Long groupNumber, Long universityId) {

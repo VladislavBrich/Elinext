@@ -3,9 +3,8 @@ package com.example.elinext.dto;
 import lombok.Data;
 
 @Data
-public class AskRequestGroupDto {
-
+public class AskRequestAudienceDto {
+    private Long universityId;
     private Long number;
 
-    private String universityName;
 }

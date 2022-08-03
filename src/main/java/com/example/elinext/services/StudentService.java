@@ -18,4 +18,6 @@ public interface StudentService {
     void deleteById(Long studentId);
 
     List<LectureDto> getLecturesByDayOfWeek(String studentLastName, DaysOfWeek daysOfWeek);
+
+    StudentDto update(Long id, String name, String surname, Long groupId);
 }

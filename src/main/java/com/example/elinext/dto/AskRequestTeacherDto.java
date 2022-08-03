@@ -7,10 +7,10 @@ import lombok.NonNull;
 public class AskRequestTeacherDto {
 
     @NonNull
-    private String teacherName;
+    private String name;
 
     @NonNull
-    private String teacherSurname;
+    private String surname;
 
     @NonNull
     private String universityName;

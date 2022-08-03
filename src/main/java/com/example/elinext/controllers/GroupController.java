@@ -1,10 +1,8 @@
 package com.example.elinext.controllers;
 
 import com.example.elinext.dto.*;
-
 import com.example.elinext.models.Group;
 import com.example.elinext.services.Impl.GroupServiceImpl;
-import com.example.elinext.services.Impl.LectureServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,4 +47,12 @@ public class GroupController {
     public List<LectureDto> getLecturesByGroupId(@PathVariable Long groupId) {
         return groupService.getAllLecturesByGroupId(groupId);
     }
+
+    @PostMapping("update/{id}")
+    public GroupDto update(
+            @PathVariable(name = "id") Long id,
+            @RequestParam(name = "number") Long number) {
+        return groupService.update(id, number);
+    }
 }
+

@@ -37,4 +37,9 @@ public class UniversityController {
         universityService.delete(universityId);
         return AskDto.giveAnAnswer(true);
     }
+
+    @PostMapping("update/{id}")
+    public UniversityDto updateUniversity(@PathVariable Long id, @RequestParam(name = "name") String name) {
+        return universityService.update(id, name);
+    }
 }

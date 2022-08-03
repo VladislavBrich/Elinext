@@ -36,9 +36,20 @@ public class StudentController {
         return AskDto.giveAnAnswer(true);
     }
 
-    @GetMapping("{studentLastName}/{daysOfWeek}")
-    List<LectureDto> getLecturesForStudentByDayOfWeek(@PathVariable String studentLastName, @PathVariable DaysOfWeek daysOfWeek) {
-        return studentService.getLecturesByDayOfWeek(studentLastName, daysOfWeek);
+    @GetMapping("{surname}/{daysOfWeek}")
+    List<LectureDto> getLecturesForStudentByDayOfWeek(
+            @PathVariable String surname,
+            @PathVariable DaysOfWeek daysOfWeek) {
+        return studentService.getLecturesByDayOfWeek(surname, daysOfWeek);
+    }
+
+    @PostMapping("update/{id}")
+    public StudentDto update(
+            @PathVariable Long id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) Long groupId) {
+        return studentService.update(id, name, surname, groupId);
     }
 }
 

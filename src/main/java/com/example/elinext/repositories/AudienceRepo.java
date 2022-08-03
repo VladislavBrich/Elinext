@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 public interface AudienceRepo extends JpaRepository<Audience, Long> {
 
+    void deleteByNumberAndUniversityId(Long number, Long id);
+
+    Boolean existsByNumber(Long number);
 
 }
 

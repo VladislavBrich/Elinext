@@ -2,10 +2,8 @@ package com.example.elinext.mapper;
 
 
 import com.example.elinext.dto.LectureDto;
-import com.example.elinext.hellpers.DaysOfWeek;
 import com.example.elinext.models.Lecture;
 import lombok.AllArgsConstructor;
-import org.hibernate.usertype.LoggableUserType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +22,7 @@ public class LectureMapper {
     public LectureDto lectureToLectureDto(Lecture lecture) {
         return new LectureDto(
                 lecture.getId(),
-                lecture.getLecturesName(),
+                lecture.getName(),
                 groupMapper.groupDtoForLecture(lecture.getGroup()),
                 teacherMapper.createTeacherDto(lecture.getTeacher()),
                 lecture.getDaysOfWeek(),

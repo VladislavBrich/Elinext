@@ -53,7 +53,10 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public Boolean existsByUniversityName(String universityName) {
-        return universityRepo.existsByUniversityName(universityName);
+        if (universityRepo.existsByUniversityName(universityName)) {
+            return true;
+        } else
+            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", universityName));
     }
 
     public University findById(Long universityId) {
@@ -69,6 +72,14 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public Boolean existsByUniversityId(Long id) {
         return universityRepo.existsById(id);
+    }
+
+    @Override
+    public UniversityDto update(Long id, String name) {
+        University university = findById(id);
+        university.setUniversityName(name);
+        universityRepo.save(university);
+        return universityMapper.universityToUniversityDto(university);
     }
 }
 

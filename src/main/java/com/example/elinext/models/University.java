@@ -14,19 +14,24 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "universiry")
+@Table(name = "university")
 public class University extends BaseEntity {
 
     @Column(name = "name")
     private String universityName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(columnDefinition = "university_id", referencedColumnName = "id")
+    @JoinColumn(name = "university_id", referencedColumnName = "id")
     private List<Audience> audiences = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id", referencedColumnName = "id")
     private List<Group> groups = new ArrayList<>();
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "university_id", referencedColumnName = "id")
+    private List<Teacher> teachers = new ArrayList<>();
+
 
     public University(String universityName) {
         this.universityName = universityName;

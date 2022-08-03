@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "teachers")
+@Table(name = "teacher")
 public class Teacher extends BaseEntity {
 
     @Column
@@ -23,15 +22,15 @@ public class Teacher extends BaseEntity {
     private String teacherSurname;
 
     @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_surname", referencedColumnName = "teacherSurname")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private List<Lecture> lectures = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "university_name", referencedColumnName = "name")
-    private University university;
+    @JoinColumn(name = "university_id", referencedColumnName = "id")
+    University university;
 
-    @Column(name = "university_name", updatable = false, insertable = false)
-    String universityName;
+    @Column(name = "university_id", updatable = false, insertable = false)
+    Long universityId;
 
     public Teacher(String teacherSurname) {
         this.teacherSurname = teacherSurname;

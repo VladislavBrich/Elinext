@@ -13,10 +13,10 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 
     List<Student> findAllByGroupId(Long groupId);
 
-    List <Student> findAllByStudentLastName(String studentLastName);
+    List <Student> findAllBySurname(String surname);
 
-    Student findByStudentLastName(String studentLastName);
+    Student findBySurname(String surname);
 
-    Boolean existsByStudentLastName(String studentLastName);
+    Boolean existsBySurname(String surname);
 
 }

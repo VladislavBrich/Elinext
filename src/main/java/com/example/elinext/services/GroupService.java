@@ -18,7 +18,9 @@ public interface GroupService {
 
     List<StudentDto> getAllStudentByGroupId(Long GroupId);
 
-    boolean existByGroupId(Long groupId);
+    void existByGroupId(Long groupId);
 
     List<LectureDto> getAllLecturesByGroupId(Long groupId);
+
+    GroupDto update (Long id, Long number);
 }
