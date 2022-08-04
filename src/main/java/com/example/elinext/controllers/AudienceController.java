@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "audience", produces = MediaType.APPLICATION_JSON_VALUE)
-@Transactional
 public class AudienceController {
 
     private AudienceServiceImpl audienceService;
@@ -32,7 +31,7 @@ public class AudienceController {
     public List<AudienceDto> getAllByUniversity(@PathVariable Long universityId) {
         return audienceService.getAllByUniversityId(universityId);
     }
-
+    @Transactional
     @PostMapping("update/{id}")
     public AudienceDto update (@PathVariable Long id,@RequestParam (name = "number")Long number){
        return audienceService.update(id,number);
