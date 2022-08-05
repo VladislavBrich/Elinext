@@ -22,12 +22,12 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public UniversityDto create(AskRequestUniversityDto askRequestUniversityDto) {
-        if (universityRepo.existsByName(askRequestUniversityDto.getUniversityName())) {
+        if (universityRepo.existsByName(askRequestUniversityDto.getName())) {
             throw new BadRequestException(String.format("University with that name \"%s\" is already exist",
-                    askRequestUniversityDto.getUniversityName())
+                    askRequestUniversityDto.getName())
             );
         }
-        University university = new University(askRequestUniversityDto.getUniversityName());
+        University university = new University(askRequestUniversityDto.getName());
         universityRepo.save(university);
         return universityMapper.universityToUniversityDto(university);
     }
