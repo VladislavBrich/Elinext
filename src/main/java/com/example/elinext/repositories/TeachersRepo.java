@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface TeachersRepo extends JpaRepository<Teacher, Long> {
 
-    Boolean existsByTeacherSurname(String teacherSurname);
+    Boolean existsBySurname(String teacherSurname);
 
-    Teacher getTeacherByTeacherSurname(String teacherSurname);
+    Teacher getTeacherBySurname(String teacherSurname);
 
     List<Teacher> getAllByUniversityId(Long universityId);
 }

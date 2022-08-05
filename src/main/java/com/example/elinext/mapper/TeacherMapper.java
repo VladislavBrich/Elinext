@@ -19,7 +19,7 @@ public class TeacherMapper {
         return new TeacherDto(
                 teacher.getId(),
                 teacher.getName(),
-                teacher.getTeacherSurname(),
+                teacher.getSurname(),
                 universityMapper.universityToUniversityDto(teacher.getUniversity())
         );
     }

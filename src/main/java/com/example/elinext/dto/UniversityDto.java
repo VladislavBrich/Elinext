@@ -1,17 +1,14 @@
 package com.example.elinext.dto;
 
 
-import com.example.elinext.models.Group;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UniversityDto {
 
     private Long id;

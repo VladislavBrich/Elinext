@@ -19,7 +19,7 @@ public class Teacher extends BaseEntity {
     private String name;
 
     @Column
-    private String teacherSurname;
+    private String surname;
 
     @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
@@ -32,13 +32,13 @@ public class Teacher extends BaseEntity {
     @Column(name = "university_id", updatable = false, insertable = false)
     Long universityId;
 
-    public Teacher(String teacherSurname) {
-        this.teacherSurname = teacherSurname;
+    public Teacher(String surname) {
+        this.surname = surname;
     }
 
-    public Teacher(String teacherName, String teacherSurname, University university) {
+    public Teacher(String teacherName, String surname, University university) {
         this.name = teacherName;
-        this.teacherSurname = teacherSurname;
+        this.surname = surname;
         this.university = university;
     }
 }

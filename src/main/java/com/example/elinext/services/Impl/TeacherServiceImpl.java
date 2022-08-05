@@ -25,12 +25,12 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Boolean existByTeacherSurname(String teacherSurname) {
-        return teachersRepo.existsByTeacherSurname(teacherSurname);
+        return teachersRepo.existsBySurname(teacherSurname);
     }
 
     @Override
     public Teacher getByTeacherSurname(String teacherSurname) {
-        return teachersRepo.getTeacherByTeacherSurname(teacherSurname);
+        return teachersRepo.getTeacherBySurname(teacherSurname);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacher.setName(name);
         }
         if (!(surname == null)) {
-            teacher.setTeacherSurname(surname);
+            teacher.setSurname(surname);
         }
         teachersRepo.save(teacher);
         return teacherMapper.createTeacherDto(teacher);
