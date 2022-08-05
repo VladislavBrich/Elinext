@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "groups")
 public class Group extends BaseEntity {
     @Column
-    private Long groupNumber;
+    private Long number;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
@@ -33,8 +33,8 @@ public class Group extends BaseEntity {
     @Column(name = "university_id", updatable = false, insertable = false)
     Long universityId;
 
-    public Group(Long groupNumber, University university) {
-        this.groupNumber = groupNumber;
+    public Group(Long number, University university) {
+        this.number = number;
         this.university = university;
     }
 

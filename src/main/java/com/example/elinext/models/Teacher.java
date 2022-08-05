@@ -16,7 +16,7 @@ import java.util.List;
 public class Teacher extends BaseEntity {
 
     @Column
-    private String teacherName;
+    private String name;
 
     @Column
     private String teacherSurname;
@@ -37,7 +37,7 @@ public class Teacher extends BaseEntity {
     }
 
     public Teacher(String teacherName, String teacherSurname, University university) {
-        this.teacherName = teacherName;
+        this.name = teacherName;
         this.teacherSurname = teacherSurname;
         this.university = university;
     }

@@ -3,4 +3,14 @@ databaseChangeLog:
       file: db/changelog/changeSet/create-university-table.yaml
   - include:
       file: db/changelog/changeSet/create-teacher-table.yaml
+  - include:
+      file: db/changelog/changeSet/create-group-table.xml
+  - include:
+      file: db/changelog/changeSet/create-student-table.xml
+  - include:
+      file: db/changelog/changeSet/create-audience-table.xml
+  - include:
+      file: db/changelog/changeSet/create-lecture-table.xml
+
+
 

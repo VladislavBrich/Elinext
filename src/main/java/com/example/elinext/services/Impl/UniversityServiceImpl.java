@@ -22,7 +22,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public UniversityDto create(AskRequestUniversityDto askRequestUniversityDto) {
-        if (universityRepo.existsByUniversityName(askRequestUniversityDto.getUniversityName())) {
+        if (universityRepo.existsByName(askRequestUniversityDto.getUniversityName())) {
             throw new BadRequestException(String.format("University with that name \"%s\" is already exist",
                     askRequestUniversityDto.getUniversityName())
             );
@@ -52,11 +52,11 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
-    public Boolean existsByUniversityName(String universityName) {
-        if (universityRepo.existsByUniversityName(universityName)) {
+    public Boolean existsByName(String name) {
+        if (universityRepo.existsByName(name)) {
             return true;
         } else
-            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", universityName));
+            throw new BadRequestException(String.format("University with that name \"%s\" is not exist", name));
     }
 
     public University findById(Long universityId) {
@@ -66,7 +66,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public University findByName(String universityName) {
-        return universityRepo.findByUniversityName(universityName);
+        return universityRepo.findByName(universityName);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public UniversityDto update(Long id, String name) {
         University university = findById(id);
-        university.setUniversityName(name);
+        university.setName(name);
         universityRepo.save(university);
         return universityMapper.universityToUniversityDto(university);
     }

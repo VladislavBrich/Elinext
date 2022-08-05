@@ -15,7 +15,7 @@ public class UniversityMapper {
     public UniversityDto universityToUniversityDto(University university) {
         return new UniversityDto(
                 university.getId(),
-                university.getUniversityName()
+                university.getName()
         );
     }
 

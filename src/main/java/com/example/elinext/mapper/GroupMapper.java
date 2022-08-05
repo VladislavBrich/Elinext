@@ -15,12 +15,12 @@ public class GroupMapper {
     private final UniversityMapper universityMapper;
 
     public GroupDto groupDtoForLecture (Group group){
-        return new GroupDto(group.getId(),group.getGroupNumber());
+        return new GroupDto(group.getId(),group.getNumber());
     }
 
     public GroupDto groupToGroupDto(Group group) {
         return new GroupDto(group.getId(),
-                group.getGroupNumber(),
+                group.getNumber(),
                 universityMapper.universityToUniversityDto(group.getUniversity()));
     }
 

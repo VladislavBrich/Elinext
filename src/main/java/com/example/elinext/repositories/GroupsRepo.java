@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 public interface GroupsRepo extends JpaRepository<Group, Long> {
 
-    void deleteByGroupNumberAndUniversityId(Long groupNumber, Long universityId);
+    void deleteByNumberAndUniversityId(Long number, Long universityId);
 
-    boolean existsByGroupNumber(Long groupNumber);
+    boolean existsByNumber(Long number);
 }

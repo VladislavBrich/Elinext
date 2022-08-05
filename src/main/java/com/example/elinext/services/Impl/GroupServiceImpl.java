@@ -32,7 +32,7 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
 
     @Override
     public GroupDto create(AskRequestGroupDto askRequestGroupDto) {
-        universityService.existsByUniversityName(askRequestGroupDto.getUniversityName());
+        universityService.existsByName(askRequestGroupDto.getUniversityName());
         University university = universityService.findByName(askRequestGroupDto.getUniversityName());
         Group group = new Group(askRequestGroupDto.getNumber(), university);
         groupsRepo.save(group);
@@ -72,17 +72,17 @@ public class GroupServiceImpl implements com.example.elinext.services.GroupServi
     @Override
     public GroupDto update(Long id, Long number) {
         Group group = getById(id);
-        group.setGroupNumber(number);
+        group.setNumber(number);
         groupsRepo.save(group);
         return groupMapper.groupToGroupDto(group);
     }
 
-    public void delete(Long groupNumber, Long universityId) {
+    public void delete(Long number, Long universityId) {
         if (universityService.existsByUniversityId(universityId)
-                && groupsRepo.existsByGroupNumber(groupNumber)) {
-            groupsRepo.deleteByGroupNumberAndUniversityId(groupNumber, universityId);
+                && groupsRepo.existsByNumber(number)) {
+            groupsRepo.deleteByNumberAndUniversityId(number, universityId);
         } else throw new NotFoundException(
-                String.format("Group with groupNumber " + groupNumber + " or universityId "
+                String.format("Group with groupNumber " + number + " or universityId "
                         + universityId + " is not exist")
         );
     }

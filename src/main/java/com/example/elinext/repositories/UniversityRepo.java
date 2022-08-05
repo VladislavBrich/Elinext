@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UniversityRepo extends JpaRepository<University, Long> {
 
-    Boolean existsByUniversityName(String name);
+    Boolean existsByName(String name);
 
-    University findByUniversityName(String name);
+    University findByName(String name);
 }

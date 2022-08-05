@@ -18,7 +18,7 @@ public class TeacherMapper {
    public TeacherDto createTeacherDto(Teacher teacher) {
         return new TeacherDto(
                 teacher.getId(),
-                teacher.getTeacherName(),
+                teacher.getName(),
                 teacher.getTeacherSurname(),
                 universityMapper.universityToUniversityDto(teacher.getUniversity())
         );

@@ -63,7 +63,7 @@ public class TeacherServiceImpl implements TeacherService {
         Teacher teacher = teachersRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Teacher with id " + id + " does not exist")));
         if (!(name == null)) {
-            teacher.setTeacherName(name);
+            teacher.setName(name);
         }
         if (!(surname == null)) {
             teacher.setTeacherSurname(surname);

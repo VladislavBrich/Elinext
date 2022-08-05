@@ -12,11 +12,11 @@ public interface UniversityService {
 
     void delete(Long universityId);
 
-    Boolean existsByUniversityName(String universityName);
+    Boolean existsByName(String universityName);
 
     University findById(Long id);
 
-    University findByName(String universityName);
+    University findByName(String name);
 
     Boolean existsByUniversityId(Long id);
 

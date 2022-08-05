@@ -18,7 +18,7 @@ import java.util.List;
 public class University extends BaseEntity {
 
     @Column(name = "name")
-    private String universityName;
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id", referencedColumnName = "id")
@@ -33,8 +33,8 @@ public class University extends BaseEntity {
     private List<Teacher> teachers = new ArrayList<>();
 
 
-    public University(String universityName) {
-        this.universityName = universityName;
+    public University(String name) {
+        this.name = name;
     }
 }
 
