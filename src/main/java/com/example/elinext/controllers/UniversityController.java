@@ -6,6 +6,7 @@ import com.example.elinext.dto.AskRequestUniversityDto;
 import com.example.elinext.dto.UniversityDto;
 import com.example.elinext.services.Impl.UniversityServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("university")
+@RequestMapping(value = "university",produces = MediaType.APPLICATION_JSON_VALUE)
 public class UniversityController {
     private final UniversityServiceImpl universityService;
 
